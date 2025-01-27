@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="API">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CONTEXT">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="PORT">
+                                <xs:complexType>
+                                    <xs:attribute name="REST" use="required">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:pattern value="\d{4,5}"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="HOST">
+                                <xs:complexType>
+                                    <xs:attribute name="REST" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="BASE_PATH">
+                                <xs:complexType>
+                                    <xs:attribute name="PORTAL" use="required"/>
+                                    <xs:attribute name="REST" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="UNDERTOW">
+                                <xs:complexType>
+                                    <xs:attribute name="IO_THREAD_POOL">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:positiveInteger"/>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="WORKER_THREAD_POOL">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:positiveInteger"/>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DB">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="INITIALIZE" type="xs:boolean"/>
+                            <xs:element name="DATABASE_SERVER">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:enumeration value="MySQL"/>
+                                        <xs:enumeration value="PostgreSQL"/>
+                                        <xs:enumeration value="MicrosoftSQL"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="HOST" type="xs:string"/>
+                            <xs:element name="PORT">
+                                <xs:simpleType>
+                                    <xs:restriction base="xs:string">
+                                        <xs:pattern value="\d{4,5}"/>
+                                    </xs:restriction>
+                                </xs:simpleType>
+                            </xs:element>
+                            <xs:element name="DATABASE_NAME">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="TYPE" use="required">
+                                                <xs:simpleType>
+                                                    <xs:restriction base="xs:string">
+                                                        <xs:enumeration value="CLEARTEXT"/>
+                                                        <xs:enumeration value="ENCRYPTED"/>
+                                                    </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:attribute>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="USERNAME">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="TYPE" use="required">
+                                                <xs:simpleType>
+                                                    <xs:restriction base="xs:string">
+                                                        <xs:enumeration value="CLEARTEXT"/>
+                                                        <xs:enumeration value="ENCRYPTED"/>
+                                                    </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:attribute>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="PASSWORD">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="xs:string">
+                                            <xs:attribute name="TYPE" use="required">
+                                                <xs:simpleType>
+                                                    <xs:restriction base="xs:string">
+                                                        <xs:enumeration value="CLEARTEXT"/>
+                                                        <xs:enumeration value="ENCRYPTED"/>
+                                                    </xs:restriction>
+                                                </xs:simpleType>
+                                            </xs:attribute>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="SHOW_SQL" type="xs:boolean"/>
+                            <xs:element name="SLING_RING">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="INITIAL_POOL_SIZE">
+                                            <xs:complexType>
+                                                <xs:attribute name="VALUE" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="MAXIMUM_POOL_SIZE">
+                                            <xs:complexType>
+                                                <xs:attribute name="VALUE" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="EXTRA_CONNS_SIZE">
+                                            <xs:complexType>
+                                                <xs:attribute name="VALUE" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="FIND_FREE_CONN_AFTER">
+                                            <xs:complexType>
+                                                <xs:attribute name="TIME_UNIT" use="required">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:enumeration value="MILLISECONDS"/>
+                                                            <xs:enumeration value="SECONDS"/>
+                                                            <xs:enumeration value="MINUTES"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:attribute>
+                                                <xs:attribute name="VALUE" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="DOWNSIZE_AFTER">
+                                            <xs:complexType>
+                                                <xs:attribute name="TIME_UNIT" use="required">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:enumeration value="MILLISECONDS"/>
+                                                            <xs:enumeration value="SECONDS"/>
+                                                            <xs:enumeration value="MINUTES"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:attribute>
+                                                <xs:attribute name="VALUE" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="PING_AFTER">
+                                            <xs:complexType>
+                                                <xs:attribute name="TIME_UNIT" use="required">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:enumeration value="MILLISECONDS"/>
+                                                            <xs:enumeration value="SECONDS"/>
+                                                            <xs:enumeration value="MINUTES"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:attribute>
+                                                <xs:attribute name="VALUE" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="BACKUP_FOLDER">
+                                <xs:complexType>
+                                    <xs:attribute name="PATH" type="xs:string"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

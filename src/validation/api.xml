@@ -1,0 +1,27 @@
+<API>
+    <CONTEXT>
+        <PORT REST="8101"/> <!--MANDATORY. REST should not be blank, and should only allow numbers and only be 4 or 5 digits-->
+        <HOST REST="0.0.0.0"/> <!-- MANDATORY. REST attribute should not be blank-->
+        <BASE_PATH PORTAL="/portal" REST="/api/rest"/> <!-- MANDATORY. PORTAL and REST attribute should not be blank-->
+        <UNDERTOW IO_THREAD_POOL="5" WORKER_THREAD_POOL="10"/> <!--IO_THREAD_POOL and WORKER_THREAD_POOL should only be digits, 1 or more-->
+    </CONTEXT>
+    <DB>
+        <INITIALIZE>false</INITIALIZE> <!--MANDATORY and should only allow true or false values-->
+        <DATABASE_SERVER>MySQL</DATABASE_SERVER> <!--MANDATORY and should only allow MySQL, PostgreSQL, MicrosoftSQL values-->
+        <HOST>192.168.90.50</HOST> <!-- MANDATORY -->
+        <PORT>3306</PORT> <!--MANDATORY and should only allow numbers and only be 4 or 5 digits-->
+        <DATABASE_NAME TYPE="CLEARTEXT">dbName</DATABASE_NAME> <!-- MANDATORY value must be provided. For TYPE, allowed values are CLEARTEXT, ENCRYPTED -->
+        <USERNAME TYPE="ENCRYPTED">theUsername</USERNAME> <!-- MANDATORY value must be provided. For TYPE, allowed values are CLEARTEXT, ENCRYPTED -->
+        <PASSWORD TYPE="CLEARTEXT">thePassword</PASSWORD> <!-- MANDATORY value must be provided. For TYPE, allowed values are CLEARTEXT, ENCRYPTED -->
+        <SHOW_SQL>false</SHOW_SQL> <!-- MANDATORY value must be provided. Allowed values are true, false -->
+        <SLING_RING>
+            <INITIAL_POOL_SIZE VALUE="5"/> <!--MANDATORY. VALUE should only be digits, 1 or more-->
+            <MAXIMUM_POOL_SIZE VALUE="40"/> <!--MANDATORY. VALUE should only be digits, 1 or more-->
+            <EXTRA_CONNS_SIZE VALUE="5"/> <!--MANDATORY. VALUE should only be digits, 1 or more-->
+            <FIND_FREE_CONN_AFTER TIME_UNIT="MILLISECONDS" VALUE="1500"/> <!--MANDATORY. TIME_UNIT allowed values are MILLISECONDS, SECONDS, MINUTES. VALUE should only be digits, 1 or more-->
+            <DOWNSIZE_AFTER TIME_UNIT="SECONDS" VALUE="10"/> <!--MANDATORY. TIME_UNIT allowed values are MILLISECONDS, SECONDS, MINUTES. VALUE should only be digits, 1 or more-->
+            <PING_AFTER TIME_UNIT="MINUTES" VALUE="60"/> <!--MANDATORY. TIME_UNIT allowed values are MILLISECONDS, SECONDS, MINUTES. VALUE should only be digits, 1 or more-->
+        </SLING_RING>
+        <BACKUP_FOLDER PATH=""/> <!--PATH can be blank or have value -->
+    </DB>
+</API>
